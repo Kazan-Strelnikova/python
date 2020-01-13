@@ -18,7 +18,7 @@ LEFT = 'left'
 RIGHT = 'right'
 
 HEAD = 0
-
+cell = size[0] // 29#кол-во клеточек
 
 def load_image(name):
     fullname = os.path.join(name)
@@ -31,7 +31,9 @@ def terminate():
     sys.exit()
 
 
+
 def runGame():
+    global headpos
     screen.fill((0, 100, 0))
     all_sprites.draw(screen)
     # Set a random start point.
@@ -83,6 +85,7 @@ def runGame():
         elif direction == RIGHT:
             newHead = {'x': snake[HEAD]['x'] + 1, 'y': snake[HEAD]['y']}
         snake.insert(0, newHead)
+        headpos = newHead
 
         drawSnake(snake, direction)
         drawApple(apple)
@@ -150,7 +153,7 @@ def load_level(filename):
         level_map = [line.strip() for line in mapFile]
     # и подсчитываем максимальную длину
     max_width = max(map(len, level_map))
-    cell = max_width
+    #cell = max_width если поле больше экрана
     # дополняем каждую строку пустыми клетками ('.')
     return list(map(lambda x: x.ljust(max_width, '.'), level_map))
 
