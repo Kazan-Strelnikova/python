@@ -113,7 +113,7 @@ def runGame():
         cameraX = -(headpos['x'] - 8.5) * tile_width
         cameraY = -(headpos['y'] - 8.5) * tile_height
 
-        if appl == 3:
+        if appl == 10:
             nextLevel()
 
         drawSnake(snake, direction)
