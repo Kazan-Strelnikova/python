@@ -22,10 +22,13 @@ cell = [0, 0]
 cameraX = 0
 cameraY = 0
 levelnow = 1
+
+
 def load_image(name):
     fullname = os.path.join(name)
     image = pygame.image.load(fullname).convert_alpha()
     return image
+
 
 def draw_image(name, pos):
     surf = load_image(name)
@@ -38,6 +41,8 @@ def terminate():
 
 
 appl = 0
+
+
 def runGame():
     global headpos, appl
     appl = 0
@@ -52,8 +57,7 @@ def runGame():
     # Start the apple in a random place.
     apple = getRandomLocation()
     if level[apple['y']][apple['x']] == '#':
-            apple = getRandomLocation()
-
+        apple = getRandomLocation()
 
     while True:  # main game loop
         for event in pygame.event.get():  # event handling loop
@@ -72,8 +76,8 @@ def runGame():
                     terminate()
 
         # check if the worm has hit itself or the edge
-        if snake[HEAD]['x'] == -1 or snake[HEAD]['x'] == cell[0] \
-                or snake[HEAD]['y'] == -1 or snake[HEAD]['y'] == cell[1]:
+        if snake[HEAD]['x'] == -1 or snake[HEAD]['x'] == cell[0] or snake[HEAD]['y'] == -1 or snake[HEAD]['y'] == cell[
+            1]:
             gameover()  # game over
         for wormBody in snake[1:]:
             if wormBody['x'] == snake[HEAD]['x'] and wormBody['y'] == snake[HEAD]['y']:
@@ -195,6 +199,7 @@ class Tile(pygame.sprite.Sprite):
         self.image = tile_images[tile_type]
         self.rect = self.image.get_rect().move(tile_width * pos_x, tile_height * pos_y)
 
+
 def generate_level(level):
     x, y = None, None
     for y in range(len(level)):
@@ -225,6 +230,7 @@ def drawSnake(snake, direction):
         else:
             image = "body.png"
         draw_image(image, (x, y))
+
 
 def nextLevel():
     global lev, level, levelnow
@@ -287,6 +293,8 @@ def win():
                 runGame()
         pygame.display.flip()
         clock.tick(FPS)
+
+
 level = load_level('map1.txt')
 level_x, level_y = generate_level(load_level('map1.txt'))
 
